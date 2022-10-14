@@ -1,4 +1,5 @@
 from collections import deque
+from tracemalloc import start
 
 class Graph:
     def __init__(self, adjacency_list):
@@ -6,6 +7,7 @@ class Graph:
     def get_neighbors(self, v): #lấy hàng xóm nút đang xét
         return self.adjacency_list[v]
     def h(self, n): #khai báo vị trí các điểm, h: hàm heuristic, hàm heuristic với các giá trị bằng nhau cho tất cả các nút
+        #Khởi tạo các node với khoảng cách thực tế khi đi qua các node
         H = {
             'P1': 1,
             'P2': 1,
@@ -78,10 +80,14 @@ class Graph:
 def input_start():
     print('Mời bạn nhập điểm đi: ')
     start = input() #P1
+    if not start:
+        print("Bạn chưa nhập gì!")
     return start.upper()
 def input_stop():
     print('Mời bạn nhập điểm đến: ')
     stop = input()
+    if not stop:
+        print("Bạn chưa nhập gì!")
     return stop.upper()
 adjacency_list = {
     'P1': [('P2', 0.5), ('P3', 1.1)],
@@ -97,5 +103,5 @@ graph1 = Graph(adjacency_list)
 print('Chào mừng bạn đến với!\nChương trình tìm đường đi đến các Trạm Y tế phường Bình Thạnh')
 print('Danh sách Trạm Y tế hỗ trợ từ Phường 1 đến Phường 24')
 print('Bạn chỉ cần nhập đúng viết tắt của tên phường đi và đến (Ví dụ: P1 ứng với Phường 1)')
-print('Minh họa: Điểm đi P1 -> Điểm đến P4')
+print('Minh họa: Điểm đi P1 -> Điểm đến P7')
 graph1.a_star_algorithm(input_start(), input_stop())
