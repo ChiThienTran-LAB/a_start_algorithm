@@ -6,7 +6,7 @@ class Graph:
         self.adjacency_list = adjacency_list #danh sách các đỉnh và đỉnh gần kề
     def get_neighbors(self, v): #lấy hàng xóm nút đang xét
         return self.adjacency_list[v]
-    def h(self, n): #khai báo vị trí các điểm, h: hàm heuristic, hàm heuristic với các giá trị bằng nhau cho tất cả các nút
+    def heuristic(self, n): #khai báo vị trí các điểm, h: hàm heuristic, hàm heuristic với các giá trị bằng nhau cho tất cả các nút
         #Khởi tạo các node với khoảng cách thực tế khi đi qua các node
         H = {
             'P1': 2.3,
@@ -42,9 +42,9 @@ class Graph:
         
         while len(open_list) > 0:
             n = None
-            #tìm một nút có giá trị thấp nhất của f () - hàm đánh giá
+            #tìm một nút có giá trị thấp nhất của f() - hàm đánh giá
             for v in open_list:
-                if n == None or g[v] + self.h(v) < g[n] + self.h(n):
+                if n == None or g[v] + self.heuristic(v) < g[n] + self.heuristic(n):
                     n = v
             if n == None:
                 print('Không có đường đi nào!')
