@@ -9,13 +9,20 @@ class Graph:
     def h(self, n): #khai báo vị trí các điểm, h: hàm heuristic, hàm heuristic với các giá trị bằng nhau cho tất cả các nút
         #Khởi tạo các node với khoảng cách thực tế khi đi qua các node
         H = {
-            'P1': 1,
-            'P2': 1,
-            'P3': 1,
-            'P4': 1,
-            'P5': 1,
-            'P6': 1,
-            'P7': 1
+            'P1': 2.3,
+            'P2': 2,
+            'P3': 2.5,
+            'P4': 3,
+            'P5': 2.8,
+            'P6': 3.0,
+            'P7': 6.0,
+            'P8': 2.0,
+            'P9': 1.5,
+            'P10': 3.1,
+            'A': 0,
+            'B': 0,
+            'C': 0,
+            'D': 0
         }
         return H[n]
     def a_star_algorithm(self, start_node, stop_node): #hàm a* chứa điểm BĐ và điểm KT
@@ -89,19 +96,27 @@ def input_stop():
     if not stop:
         print("Bạn chưa nhập gì!")
     return stop.upper()
+#Khai báo list các điểm kề với các node có trong đồ thị
 adjacency_list = {
     'P1': [('P2', 0.5), ('P3', 1.1)],
-    'P2': [('P3', 1.0), ('P1', 0.5)],
-    'P3': [('P4', 1.5), ('P6', 2.9), ('P7', 2.0), ('P1', 1.1), ('P2', 1.0)],
-    'P4': [('P5', 1.5), ('P4', 1.5)],
-    'P5': [('P6', 1.0), ('P4', 1.5)],
-    'P6': [('P7', 1.0), ('P5', 1.0), ('P3', 2.9)],
-    'P7': [('P3', 2.0), ('P6', 1.0)]
+    'P2': [('P3', 1.2), ('P1', 0.5), ('P7', 6.0), ('P10', 3.8)],
+    'P3': [('P1', 1.1), ('P2', 1.2), ('P6', 2.1), ('A', 2.3)],
+    'P4': [('A', 2.6), ('P5', 1.0)],
+    'P5': [('P6', 2.5), ('P4', 1.0), ('B', 1.7)],
+    'P6': [('P7', 1.0), ('P5', 2.5), ('P3', 2.1)],
+    'P7': [('P2', 6.0), ('P6', 1.0), ('B', 2.8), ('P8', 1.8)],
+    'P8': [('P7', 1.8), ('P9', 3.3), ('C', 2.8)],
+    'P9': [('P8', 3.3), ('P10', 1.1), ('D', 1.3)],
+    'P10': [('P2', 3.8), ('P9', 1.1), ('D', 0.5)],
+    'A': [('P3', 2.3), ('P4', 2.6)],
+    'B': [('P5', 1.7), ('P7', 2.8)],
+    'C': [('P8', 2.8)],
+    'D': [('P9', 1.3), ('P10', 0.5)]
 }
 graph1 = Graph(adjacency_list)
 # print(f"Đường đi ngắn nhất từ {input_start()} đến {input_stop()}")
-print('Chào mừng bạn đến với!\nChương trình tìm đường đi đến các Trạm Y tế phường Bình Thạnh')
-print('Danh sách Trạm Y tế hỗ trợ từ Phường 1 đến Phường 24')
+print('Chào mừng bạn đến với!\nChương trình tìm đường đi đến các Trạm Y tế phường của quận Gò Vấp')
+print('Danh sách Trạm Y tế hỗ trợ từ Phường 1 đến Phường 10')
 print('Bạn chỉ cần nhập đúng viết tắt của tên phường đi và đến (Ví dụ: P1 ứng với Phường 1)')
-print('Minh họa: Điểm đi P1 -> Điểm đến P7')
+print('Các điểm xuất phát là từ: A, B, C, D')
 graph1.a_star_algorithm(input_start(), input_stop())
